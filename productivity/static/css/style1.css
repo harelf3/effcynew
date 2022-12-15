@@ -1,0 +1,31 @@
+body{
+    background-color: #cafafe;
+}
+nav {
+    width: 100%!important;
+    background: #262626!important;
+    overflow: hidden!important;
+    /*box-shadow: rgb(255, 144, 0) 8px 16px 120px;*/
+}
+    
+ul{
+    padding: 0!important;
+    list-style: none!important;
+    
+}
+    
+li{
+    float: left!important;
+    padding-left: 50px!important;
+    text-align: left;
+    
+}
+#link{
+    padding: 5px !important;
+    width: 100px  !important;
+    display: block !important;
+    text-decoration: none !important;
+    color: #fff !important;
+    text-transform: uppercase!important;
+    font-weight: bold!important;
+    }
