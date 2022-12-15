@@ -1,0 +1,108 @@
+nav {
+    width: 100%!important;
+    background: #262626!important;
+    overflow: hidden!important;
+    /*box-shadow: rgb(255, 144, 0) 8px 16px 120px;*/
+}
+    
+ul{
+    padding: 0!important;
+    list-style: none!important;
+    
+}
+    
+li{
+    float: left!important;
+    padding-left: 50px!important;
+    text-align: left;
+    
+}
+#link{
+    padding: 20px !important;
+    width: 100px  !important;
+    display: block !important;
+    text-decoration: none !important;
+    color: #fff !important;
+    text-transform: uppercase!important;
+    font-weight: bold!important;
+    }
+
+body{
+    /*https://free4kwallpapers.com/uploads/originals/2018/12/02/kurzgesagt-new-horizons-wallpaper.jpg
+    https://preview.redd.it/3tkicmf246w61.jpg?width=1920&format=pjpg&auto=webp&s=d9c1aeacb2b5350f5513d9a0a4828228efaf11d3
+    */
+    background-image: url("https://free4kwallpapers.com/uploads/originals/2020/05/15/kurzgesagt-wallpaper.png");
+    background-color: black;
+    background-size: cover;
+    bottom: 0;
+}
+
+#link2{
+    /*padding: 20px !important;
+    width: 100px  !important;*/
+    display: block !important;
+    text-decoration: none !important;
+    color: #fff !important;
+    text-transform: uppercase!important;
+    font-weight: bold!important;
+    }
+
+h1{
+    color: #55bcc9;
+    text-align: center;
+}
+.bright{
+animation-name: example;
+animation-duration: 3s;
+animation-iteration-count: infinite;
+animation-timing-function: linear;
+}
+
+@keyframes example {
+0%   {filter: brightness(100%);}
+25%  {filter: brightness(125%);}
+50%  {filter: brightness(175%);}
+75%  {filter: brightness(125%);}
+100% {filter: brightness(100%);}
+}
+.styled-table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 1.1em;
+    font-family: sans-serif;
+    min-width: 400px;
+    width: 100%;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+
+.styled-table thead tr {
+    background-color: #55bcc9;
+    color: #ffffff;
+    text-align: left;
+}
+
+
+.styled-table th,
+.styled-table td {
+    padding: 12px 15px;
+}
+
+
+
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: #55bcc9;
+}
+
+/*.styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid #ffffff;
+}
+.styled-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}*/
+
+.styled-table tbody tr.active-row {
+    font-weight: bold;
+    color: #ffffff;
+}

@@ -1,0 +1,205 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Efficiency</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="{% static 'css/indexstyle.css' %}" rel="stylesheet">
+    <link rel="shortcut icon" type="image/x-icon" href="https://plumanalytics.com/wp-content/uploads/2015/06/metrics.png" />
+    <script>
+        //https://docs.google.com/spreadsheets/d/1XyOZDXtpZcwirD8fRvEoW-_JChetLSUTnqPvjllS4dQ/edit?usp=sharing
+    
+    
+    
+    // make it the level before we increment it 
+    document.addEventListener("DOMContentLoaded", () => {
+        
+    
+        const output = document.querySelector('.output');
+    const url = 'https://docs.google.com/spreadsheets/d/';
+    const ssid = '1eMNqyPlO8PtoyqXHn1F2h93PbVpN7Y8EDEkyQZCpDhU';
+    const query1 = `/gviz/tq?`;
+    const endpoint1 = `${url}${ssid}${query1}`;
+    fetch(endpoint1)
+    .then(res => res.text())
+    .then(data => {
+        const ssid1 = '1QGbMbp8Wypo5tTe5b5OhnIb_f6SGUtB0IZxI5L98U6o';
+        const endpoint2 = `${url}${ssid1}${query1}`;
+        fetch(endpoint2)
+        .then(res => res.text())
+        .then(data1 => {
+        const temp1 = data1.substr(47).slice(0, -2);
+        const json1 = JSON.parse(temp1);
+        const rows1 = json1.table.rows;
+        let bestweek = parseInt(rows1[1].c[11].v);
+        let bestday = parseInt(rows1[1].c[12].v);
+        let current_week = parseInt(rows1[11].c[8].v);
+        let current_week_score = parseInt(rows1[11].c[7].v);
+        console.log(current_week_score)
+        
+        const temp = data.substr(47).slice(0, -2);
+        const json = JSON.parse(temp);
+        const rows = json.table.rows;
+        //getting values
+        let linear_points = parseInt(rows[8].c[2].v);
+        let linear_points_next = parseInt(rows[12].c[2].v);
+        let linear_rank = parseInt(rows[10].c[2].v);
+        let calc_points = parseInt(rows[8].c[3].v);
+        let calc_points_next = parseInt(rows[12].c[3].v);
+        let calc_rank = parseInt(rows[10].c[3].v);
+        let set_points = parseInt(rows[8].c[4].v);
+        let set_points_next = parseInt(rows[11].c[4].v);
+        let set_rank = parseInt(rows[10].c[4].v);
+        var rank_dictionary = {
+            "linear_rank": linear_rank,
+            "calc_rank": calc_rank,
+            "set_rank" : set_rank,
+            "current_week":current_week
+                    };
+        rank_list = ["linear_rank","calc_rank","set_rank","current_week"];
+        // doing it for linear 
+        for (const rank of rank_list) { 
+
+        if (0<rank_dictionary[rank]  && rank_dictionary[rank]<4) {
+
+            document.getElementById(rank).src="static/css/bronze.png";
+        }
+        else if (4<=rank_dictionary[rank]  && rank_dictionary[rank]<7) {
+            document.getElementById(rank).src="static/css/silver.png";
+        }
+        else if (7<=rank_dictionary[rank] && rank_dictionary[rank]<=9) {
+            document.getElementById(rank).src="static/css/gold.png";
+            document.getElementById(rank).className = "bright";
+        }
+        else if (rank_dictionary[rank]==10) {
+            document.getElementById(rank).src="static/css/platinum.png";
+            document.getElementById(rank).className = "bright";
+        }
+        else if (rank_dictionary[rank]==11){
+            document.getElementById(rank).src="static/css/master.png";
+            document.getElementById(rank).className = "bright";
+        }
+        else{
+            document.getElementById(rank).src="static/css/bronze.png";
+        }
+        
+         }
+        
+         var score_dictionary = {
+            "linear_points": linear_points,
+            "linear_points_next": linear_points_next,
+            "calc_points": calc_points,
+            "calc_points_next": calc_points_next,
+            "set_points": set_points,
+            "set_points_next": set_points_next,
+                    };
+
+        score_list = ["linear","calc","set"];
+        for (const score of score_list) {
+            document.getElementById(score+"_points").innerHTML = score_dictionary[score+"_points"];
+            document.getElementById(score+"_points_next").innerHTML = score_dictionary[score+"_points_next"];
+        }
+            document.getElementById("current_week_score").innerHTML = current_week_score;   
+            document.getElementById("weekandday").innerHTML = "best week "+bestweek + "h best day "+bestday+"h";      
+              
+        })
+        
+        });
+        });
+        
+    </script>
+</head>
+<!--<head>
+    <title>My Resume Web Site</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="{% static 'css/scroll.css' %}" rel="stylesheet">
+</head>-->
+
+<body >
+    <nav>
+        <ul>
+            <li><a id ="link" href="{% url 'index' %}">Mission Control</a></li>
+            <li><a id ="link" href="network">NetWork</a></li>
+            <li><a id ="link" href="knowledge">Knowledge</a></li>
+            <li><a id ="link" href="player" target="_blank">Player</a></li>
+            <li><a id ="link" href="https://calendar.google.com/calendar/u/0/r" target="_blank">Calendar</a></li>
+            <li><a id ="link" href="emailsender">Get Summary</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+          <div class="row">
+            
+               <div class="col">
+                <table class="styled-table">
+                    <thead>
+                        <tr>
+                            <th>subject</th>
+                            <th>Points </th>
+                            <th>Points till next level </th>
+                            <th>Rank</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr class="active-row">
+                            <td>Linear algebra</td> 
+                            <td id="linear_points"></td>
+                            <td id ="linear_points_next"></td>
+                            <td ><a href="https://docs.google.com/spreadsheets/d/1eMNqyPlO8PtoyqXHn1F2h93PbVpN7Y8EDEkyQZCpDhU/edit#gid=0" target="blank"> <img  class="" id="linear_rank" width="100px" height="100px" src=""></a></td>
+                        </tr>
+                        <tr class="active-row">
+                            <td>Calculus </td>
+                            <td id="calc_points"></td>
+                            <td id ="calc_points_next"></td>
+                            <td ><img class="" id="calc_rank" width="100px" height="100px" src=""></td>
+                        </tr>
+                        <tr class="active-row">
+                            <td>Set Theory</td>
+                            <td id="set_points"></td>
+                            <td id ="set_points_next"></td>
+                            <td ><img class="" id="set_rank" width="100px" height="100px" src=""></td>
+                        </tr>
+                        <tr class="active-row">
+                            <td>Productivity</td>
+                            <td id="current_week_score">0</td>
+                            <td id ="weekandday">0</td>
+                            <td ><img class="" id="current_week" width="100px" height="100px" src=""></td>
+                        </tr>
+                        
+                        <!-- and so on... -->
+                    </tbody>
+                </table>
+
+               </div>
+               <div >
+                <iframe width="200%" height="200%" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vR09tCNksoc4dyU2EoQezZ28OpAEHJL32KnA6EhXEd8VeX3t16JSH3eq_kyY858Mjj0Tr2O9ywU-8LD/pubchart?oid=149549233&amp;format=interactive"></iframe>
+               </div>
+               <!--<div class="row">
+                <div class="col" >
+                    <a id="link2" href="https://docs.google.com/spreadsheets/d/1QGbMbp8Wypo5tTe5b5OhnIb_f6SGUtB0IZxI5L98U6o/edit#gid=0" target="blank"><iframe width="100%" height="100%" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vR09tCNksoc4dyU2EoQezZ28OpAEHJL32KnA6EhXEd8VeX3t16JSH3eq_kyY858Mjj0Tr2O9ywU-8LD/pubchart?oid=149549233&amp;format=interactive"></iframe></a>
+                </div>
+               </div>-->
+
+               <!--
+               <div class="col">
+                <br><Br>
+                <iframe width="381" height="236" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vR09tCNksoc4dyU2EoQezZ28OpAEHJL32KnA6EhXEd8VeX3t16JSH3eq_kyY858Mjj0Tr2O9ywU-8LD/pubchart?oid=149549233&amp;format=interactive"></iframe>      <!--<a id="link2" href="https://docs.google.com/spreadsheets/d/1QGbMbp8Wypo5tTe5b5OhnIb_f6SGUtB0IZxI5L98U6o/edit#gid=0" target="blank">time sheet</a>
+                
+               </div>-->
+    <!--<div class="col">
+        <a id="link2" href="https://docs.google.com/spreadsheets/d/1HLRhSgFEn1JDCAb6RtC4C67I-i2EDahSI_dEBzbA-uQ/edit#gid=0" target="blank">linkedin people</a><br>
+        <a id="link2" href="https://docs.google.com/spreadsheets/d/1SOBhS1vaO4-V_GAeRqZ_Sp3EpvJaOEsbPM222Qt367A/edit#gid=0" target="blank">habit breakdown</a>
+    </div>-->
+</div>
+
+
+
+        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+          
+    </div>
+    
+    <!-- for new background image <div class="container"></div>-->
+</body>
+</html>
